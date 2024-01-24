@@ -10,3 +10,5 @@
 - npx playwright test --project=firefox --trace on // get details with screenshot
 - npx playwright test --project=firefox --debug // to run debug mode see step by step
 - to avoid dublicated test use beforeEach() hook
+- use more detailed selector like user behavior  page.getByRole('button',{name:/submit/i})
+- add data-testid='SignIn' test attiribute in your app code to find page.getByTestId() locator
