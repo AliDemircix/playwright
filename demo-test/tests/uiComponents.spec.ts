@@ -231,3 +231,30 @@ test("date pickers",async({page})=>{
   await page.locator('[class="day-cell ng-star-inserted"]').getByText(expectedDate,{exact:true}).click()
   await expect(calendarInputField).toHaveValue(dateToAssert)
 })
+
+test("slider",async ({page})=>{
+
+  //Update with attribute
+  const tempGauge = page.locator('[tabtitle="Temperature"] ngx-temparature-dragger circle')
+  await tempGauge.evaluate(node=>{
+    node.setAttribute('cx',"232.630")
+    node.setAttribute('cy',"232.630")
+  })
+  await tempGauge.click()
+  //Mouse move
+  const tempBox = page. locator('[tabtitle="Temperature"] ngx-temperature-dragger') 
+  await tempBox.scrollIntoViewIfNeeded()
+
+const box = await tempBox.boundingBox() //always start top left coordinate
+//@ts-ignore
+const x = box.x + box.width / 2
+//@ts-ignore
+const y = box.y + box.height / 2 
+await page.mouse.move(x, y) 
+await page.mouse.down()
+await page.mouse.move(x+100, y) 
+await page.mouse.down()
+await page.mouse.move(x+100, y+100) 
+await page.mouse.up()
+await expect(tempBox).toContainText('30');
+})
