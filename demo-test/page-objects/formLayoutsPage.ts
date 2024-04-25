@@ -1,8 +1,10 @@
 import { Page } from "@playwright/test";
-export class formLayoutsPage {
-  private readonly page: Page;
+import { HelperBase } from "./helperBase";
+export class FormLayoutsPage extends HelperBase {
+  // private readonly page: Page;
   constructor(page: Page) {
-    this.page = page;
+    // this.page = page;
+    super(page);
   }
   async submitGridFormCredentialsAndSelectOption(
     email: string,
@@ -27,17 +29,19 @@ export class formLayoutsPage {
    * @param email - sould be email of the user
    * @param rememberMe  - sould be boolean value
    */
-  async submitInlineFormWithNameEmailAndCheckBox(name:string,email:string,rememberMe:boolean){
+  async submitInlineFormWithNameEmailAndCheckBox(
+    name: string,
+    email: string,
+    rememberMe: boolean
+  ) {
     const inlineForm = this.page.locator("nb-card", {
-        hasText: "Inline form",
-      });
-      await inlineForm.getByRole("textbox", { name: "Jane Doe" }).fill(name);
-      await inlineForm
-        .getByRole("textbox", { name: "Email" })
-        .fill(email);
-     if(rememberMe){
-        await inlineForm.getByRole("checkbox").check({ force: true });
-        await inlineForm.getByRole("button").click();
-     }
+      hasText: "Inline form",
+    });
+    await inlineForm.getByRole("textbox", { name: "Jane Doe" }).fill(name);
+    await inlineForm.getByRole("textbox", { name: "Email" }).fill(email);
+    if (rememberMe) {
+      await inlineForm.getByRole("checkbox").check({ force: true });
+      await inlineForm.getByRole("button").click();
+    }
   }
 }

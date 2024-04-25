@@ -1,16 +1,19 @@
 import { Locator, Page } from "@playwright/test";
+import { HelperBase } from "./helperBase";
 
-export class NavigationPage {
-  readonly page: Page;
+export class NavigationPage extends HelperBase{
+  // readonly page: Page;
   readonly fromLayoutsMenuItem: Locator;
   
   constructor(page: Page) {
-    this.page = page;
+    super(page);
+    // this.page = page;
   }
 
   async formLayoutsPage() {
     await this.selectGroupMenuItem("Forms");
     await this.page.getByText("Form Layouts").click();
+    await this.waitForNumberOfSeconds(2);
   }
   async datePickerPage() {
     await this.selectGroupMenuItem("Forms");

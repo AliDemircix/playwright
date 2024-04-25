@@ -13,3 +13,4 @@
 - use more detailed selector like user behavior  page.getByRole('button',{name:/submit/i})
 - add data-testid='SignIn' test attiribute in your app code to find page.getByTestId() locator
 - Click f8 to see tooltip details when you are in source tab 
+- Use extends to get inheritance from other class like class NavigationPage extends HelperBase
