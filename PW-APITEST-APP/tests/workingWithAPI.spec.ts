@@ -10,16 +10,10 @@ test.beforeEach(async ({ page }) => {
 
   await page.goto("https://conduit.bondaracademy.com/");
   await page.waitForTimeout(500);
-  await page.getByText("Sign in").click();
-  await page
-    .getByRole("textbox", { name: "Email" })
-    .fill("alidemircix@gmail.com");
-  await page.getByRole("textbox", { name: "Password" }).fill("Test2024");
-  await page.getByRole("button").click();
+
 });
 
 test("has title", async ({ page }) => {
-  // Expect a title "to contain" a substring.
 
   await page.route("**/api/articles*", async (route) => {
     const response = await route.fetch();
