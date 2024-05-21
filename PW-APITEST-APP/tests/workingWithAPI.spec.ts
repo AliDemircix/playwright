@@ -40,7 +40,7 @@ test("delete article", async ({ page, request }) => {
   const response = await request.post(
     "https://conduit-api.bondaracademy.com/api/users/login",
     {
-      data: { user: { email: "alidemircix@gmail.com", password: "Test2024" } },
+      data: { user: { email: "", password: "" } },
     }
   );
   const responseBody = await response.json();
