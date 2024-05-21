@@ -40,7 +40,7 @@ test("delete article", async ({ page, request }) => {
   const response = await request.post(
     "https://conduit-api.bondaracademy.com/api/users/login",
     {
-      data: { user: { email: "", password: "" } },
+      data: { user: { email: "alidemircix@gmail.com", password: "Test2024" } },
     }
   );
   const responseBody = await response.json();
@@ -69,7 +69,7 @@ test("delete article", async ({ page, request }) => {
   await page.waitForTimeout(3000);
   await page.getByRole("button", { name: "Delete Article" }).first().click();
 
-  await expect(page.locator("app-article-list h1").first()).not.toHaveText(
+  await expect(page.locator("app-article-list h1").first()).not.toContainText(
     "Test Article"
   );
 });
@@ -78,7 +78,7 @@ test("create article", async ({ page,request }) => {
   await page.getByText("New Article").click();
   await page
     .getByRole("textbox", { name: "Article Title" })
-    .fill("Test Article 2");
+    .fill("Ali Test Article");
   await page
     .getByRole("textbox", { name: "What's this article about?" })
     .fill("Test Article Description");
@@ -93,7 +93,7 @@ test("create article", async ({ page,request }) => {
   const slugId = articleResponseBody.article.slug;
 
   await expect(page.locator(".article-page h1").first()).toHaveText(
-    "Test Article 2"
+    "Ali Test Article"
   );
 
   await page.getByText("Home").click();
@@ -101,7 +101,7 @@ test("create article", async ({ page,request }) => {
   await page.getByText("Global Feed").click();
   await page.waitForTimeout(2000);
   await expect(page.locator("app-article-list h1").first()).toHaveText(
-    "Test Article 2"
+    "Ali Test Article"
   );
 
    const response = await request.post(
