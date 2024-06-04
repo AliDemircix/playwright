@@ -22,3 +22,4 @@
 - To change text orders add prefix to test name 001-test.spec.ts like this
 - To run parallel test in a describe method you parallel beside to describe test.describe.parallel
 - To run all describe in a spec file use at the top of page test.describe.configure({mode:'parallel'})
+- Run test with specific config file npx playwright test --config=playwright-prod.config.ts
