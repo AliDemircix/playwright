@@ -1,16 +1,17 @@
-import { test, expect, request } from '@playwright/test';
+import { expect, request } from '@playwright/test';
 import tags from '../test-data/tags.json';
+import { test } from '../test-options';
 
 test.describe('Working with API', () => {
   test.describe.configure({ retries: 2 });
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, phinionUrl }) => {
     await page.route('*/**/api/tags', async (route) => {
       await route.fulfill({
         body: JSON.stringify(tags),
       });
     });
 
-    await page.goto('https://conduit.bondaracademy.com/');
+    await page.goto(phinionUrl);
     await page.waitForTimeout(500);
   });
 
@@ -41,14 +42,11 @@ test.describe('Working with API', () => {
   });
 
   test('delete article', async ({ page, request }) => {
-    const response = await request.post(
-      'https://conduit-api.bondaracademy.com/api/users/login',
-      {
-        data: {
-          user: { email: 'alidemircix@gmail.com', password: 'Test2024' },
-        },
+    const response = await request.post(`${process.env.URL}`, {
+      data: {
+        user: { email: process.env.USERNAME, password: process.env.PASSWORD },
       },
-    );
+    });
     const responseBody = await response.json();
     const accessToken = responseBody.user.token;
     console.log(accessToken);
@@ -120,7 +118,7 @@ test.describe('Working with API', () => {
       'https://conduit-api.bondaracademy.com/api/users/login',
       {
         data: {
-          user: { email: 'alidemircix@gmail.com', password: 'Test2024' },
+          user: { email: process.env.USERNAME, password: process.env.PASSWORD },
         },
       },
     );

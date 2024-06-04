@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-runner":"npx playwright test workingWithAPI.spec.ts --project=chromium"
+    "test-runner": "npx playwright test workingWithAPI.spec.ts --project=chromium",
+    "test-runner-dev": "npx playwright test workingWithAPI.spec.ts --project=dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.43.0",
-    "@types/node": "^20.12.12"
+    "@types/node": "^20.12.12",
+    "dotenv": "^16.4.5"
   }
 }
