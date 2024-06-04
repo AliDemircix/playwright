@@ -17,3 +17,8 @@
 - Use extends to get inheritance from other class like class NavigationPage extends HelperBase
 - To change specific test retry number use this code in test block test.describe.configure({retries:2}) it should be in describe method
 - To clean database or something after retry use in the test as a second parameter testInfo testInfo.retry
+- To skip a test add skip method beside to test
+- To run parallel tests update playwright configuration fullyParallel:true
+- To change text orders add prefix to test name 001-test.spec.ts like this
+- To run parallel test in a describe method you parallel beside to describe test.describe.parallel
+- To run all describe in a spec file use at the top of page test.describe.configure({mode:'parallel'})
