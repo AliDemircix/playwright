@@ -69,6 +69,12 @@ test.describe('Working with API', () => {
       },
     );
     expect(articleResponse.status()).toEqual(201);
+    await page.screenshot({ path: 'screenshots/delete-article.png' }); // take screenshot of specific step
+    await page
+      .locator('.navbar-brand')
+      .screenshot({ path: 'screenshots/navbar-brand.png' }); // take screenshot of specific element
+    const buffer = await page.screenshot();
+    console.log(buffer.toString('base64'));
     await page.getByText('Global Feed').click();
     await page.waitForTimeout(3000);
     await page.getByText('Test Article').first().click();
