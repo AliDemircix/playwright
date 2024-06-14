@@ -75,13 +75,22 @@ export default defineConfig<TestOptions>({
       use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
       dependencies: ['articleSetup'],
     },
-
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
-      //dependencies: means before running this test, run the setup test
-      dependencies: ['setup'],
+      name: 'mobile',
+      testMatch: 'testMobile.spec.ts',
+      use: {
+        // ...devices['iPhone 13 Pro'],
+        viewport: { width: 414, height: 800 },
+        storageState: '.auth/user.json',
+      },
     },
+
+    // {
+    //   name: 'chromium',
+    //   use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
+    //   //dependencies: means before running this test, run the setup test
+    //   dependencies: ['setup'],
+    // },
     // {
     //   name: 'firefox',
     //   use: { browserName: 'firefox', storageState: '.auth/user.json' },
