@@ -4,13 +4,13 @@ import type { TestOptions } from './test-options';
 require('dotenv').config();
 
 export default defineConfig<TestOptions>({
-  timeout: 40000,
-  globalTimeout: 60000,
-  expect: {
-    timeout: 2000,
-  },
+  // timeout: 40000,
+  // globalTimeout: 60000,
+  // expect: {
+  //   timeout: 2000,
+  // },
   testDir: './tests',
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
@@ -28,6 +28,9 @@ export default defineConfig<TestOptions>({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    extraHTTPHeaders: {
+      Authorization: `Token ${process.env.ACCESS_TOKEN}`,
+    },
     video: {
       mode: 'retain-on-failure', // it will record video only failed steps
       size: { width: 1920, height: 1080 }, // this is for specific video size defaultly 800px
@@ -57,16 +60,32 @@ export default defineConfig<TestOptions>({
       testMatch: 'auth.setup.ts',
     },
     {
+      name: 'articleSetup',
+      testMatch: 'newArticle.setup.ts',
+      dependencies: ['setup'],
+    },
+    {
+      name: 'regression',
+      use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
+      dependencies: ['setup'],
+    },
+    {
+      name: 'likeCounter',
+      testMatch: 'likesCounter.spec.ts',
+      use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
+      dependencies: ['articleSetup'],
+    },
+
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json' },
       //dependencies: means before running this test, run the setup test
       dependencies: ['setup'],
     },
-
-    {
-      name: 'firefox',
-      use: { browserName: 'firefox', storageState: '.auth/user.json' },
-      dependencies: ['setup'],
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { browserName: 'firefox', storageState: '.auth/user.json' },
+    //   dependencies: ['setup'],
+    // },
   ],
 });

@@ -84,7 +84,7 @@ test.describe('Working with API', () => {
     );
   });
 
-  test('create article', async ({ page, request }) => {
+  test('create article @smoke', async ({ page, request }) => {
     await page.getByText('New Article').click();
     await page
       .getByRole('textbox', { name: 'Article Title' })

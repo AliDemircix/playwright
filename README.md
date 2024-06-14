@@ -23,3 +23,4 @@
 - To run parallel test in a describe method you parallel beside to describe test.describe.parallel
 - To run all describe in a spec file use at the top of page test.describe.configure({mode:'parallel'})
 - Run test with specific config file npx playwright test --config=playwright-prod.config.ts
+- Run specific test with tag npx playwright test --project=chromium --grep @smoke
